@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
-import ProductList from './ProductList';
+import ProductList from './components/productList/ProductList';
 import './App.css';
-import AboutUs from './AboutUs';
+import AboutUs from './components/aboutUs/AboutUs';
 
 function App() {
   
