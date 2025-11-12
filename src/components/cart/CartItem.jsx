@@ -1,11 +1,18 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItem, updateQuantity } from './CartSlice';
+import { addItem, removeItem, updateQuantity } from './CartSlice';
 import './CartItem.css';
 
 const CartItem = ({ onContinueShopping }) => {
+  const [addedToCart, setAddedToCart] = useState({});
+
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    dispatch(addItem(product));
+    setAddedToCart((prevState) => ({...prevState,[product.name]: true}));
+  };
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
