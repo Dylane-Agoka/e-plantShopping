@@ -7,21 +7,17 @@ import { addItem } from '../cart/CartSlice';
 function ProductList({ onHomeClick }) {
   const [showCart, setShowCart] = useState(false);
   const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-  const [addedToCart, setAddedToCart] = useState({});
 
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
 
   const handleAddToCart = (product) => {
     dispatch(addItem(product));
-    setAddedToCart((prevState) => ({ ...prevState, [product.name]: true }));
-
-    const button = event.target;
-    button.textContent = 'Added to Cart';
-    button.disabled = true;
-    button.classList.add('added-to-cart');
-    button.style.cursor = 'not-allowed';
   };
+
+  const alreadyAddedToCart = (plant) => {
+    return cart.some(item => item.name === plant.name)
+  }
 
   const calculateTotalQuantity = () => {
     return cart ? cart.reduce((total, item) => total + item.quantity, 0) : 0;
@@ -329,7 +325,8 @@ function ProductList({ onHomeClick }) {
                     <div className="product-title">{plant.name}</div>
                     <div className="product-description">{plant.description}</div>
                     <div className="product-price">{plant.cost}</div>
-                    <button className="product-button" onClick={(event) => handleAddToCart(plant, event)}>Add to cart</button>
+                    {alreadyAddedToCart(plant) ? (<button className="product-button added-to-cart">Added to Cart</button>) :
+                      (<button className="product-button" onClick={() => handleAddToCart(plant)}>Add to cart</button>)}
                   </div>
                 ))}
               </div>
