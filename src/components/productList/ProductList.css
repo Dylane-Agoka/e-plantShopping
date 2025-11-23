@@ -51,8 +51,8 @@ body {
 }
 
 .product-list {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	display: flex;
+	flex-wrap: wrap;
 	gap: 50px;
 	/* background-color: pink; */
 	/* justify-content: space-between; */
@@ -69,10 +69,6 @@ body {
 	text-align: center;
 	border-top: 1px dashed  rgb(134, 127, 127, 0.4);
 	border-bottom: 1px dashed  rgb(134, 127, 127, 0.4);
-}
-
-.product-description {
-	max-width: 250px;
 }
 
 /* Product Card */

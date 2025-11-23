@@ -15,6 +15,12 @@ function ProductList({ onHomeClick }) {
   const handleAddToCart = (product) => {
     dispatch(addItem(product));
     setAddedToCart((prevState) => ({ ...prevState, [product.name]: true }));
+
+    const button = event.target;
+    button.textContent = 'Added to Cart';
+    button.disabled = true;
+    button.classList.add('added-to-cart');
+    button.style.cursor = 'not-allowed';
   };
 
   const plantsArray = [
@@ -295,12 +301,12 @@ function ProductList({ onHomeClick }) {
               </h1>
               <div className="product-list">
                 {category.plants.map((plant, plantIndex) => (
-                  <div className="product-cart" key={plantIndex}>
+                  <div className="product-card" key={plantIndex}>
                     <img src={plant.image} alt={plant.name} className="product-image" />
                     <div className="product-title">{plant.name}</div>
                     <div className="product-description">{plant.description}</div>
-                    <div className="product-cost">{plant.cost}</div>
-                    <button className="product-button" onClick={() => handleAddToCart(plant)}>Add to cart</button>
+                    <div className="product-price">{plant.cost}</div>
+                    <button className="product-button" onClick={(event) => handleAddToCart(plant, event)}>Add to cart</button>
                   </div>
                 ))}
               </div>
