@@ -261,7 +261,9 @@ function ProductList({ onHomeClick }) {
   };
 
   const handleContinueShopping = (e) => {
-    e.preventDefault();
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
     setShowCart(false);
   };
   return (
@@ -288,7 +290,7 @@ function ProductList({ onHomeClick }) {
         <div className="product-grid">
           {plantsArray.map((category, index) => (
             <div key={index}>
-              <h1>
+              <h1 className='product-category'>
                 <div>{category.category}</div>
               </h1>
               <div className="product-list">
